@@ -7,9 +7,9 @@
   let input = null;
   let faucetInfo = {
     account: '0x0000000000000000000000000000000000000000',
-    network: 'testnet',
+    network: 'devnet',
     payout: 1,
-    symbol: 'ETH',
+    symbol: 'VLDM',
     hcaptcha_sitekey: '',
   };
 
@@ -43,6 +43,7 @@
     pauseOnHover: true,
     closeOnClick: false,
     animate: { in: 'fadeIn', out: 'fadeOut' },
+    message: '',
   });
 
   async function handleRequest() {
@@ -123,14 +124,20 @@
       <nav class="navbar">
         <div class="container">
           <div class="navbar-brand">
-            <a class="navbar-item" href="../..">
+            <!-- <a class="navbar-item" href="../..">
               <span class="icon">
                 <i class="fa fa-bath" />
               </span>
               <span><b>{faucetInfo.symbol} Faucet</b></span>
+            </a> -->
+            <a href="https://www.validium.network/" class="brand">
+              <div class="vldm-logo">
+                <img src="./validium-logo.png" alt="VLDM logo" />
+              </div>
+              <span><b>Faucet</b></span>
             </a>
           </div>
-          <div id="navbarMenu" class="navbar-menu">
+          <!-- <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-end">
               <span class="navbar-item">
                 <a
@@ -144,7 +151,7 @@
                 </a>
               </span>
             </div>
-          </div>
+          </div> -->
         </div>
       </nav>
     </div>
@@ -154,27 +161,24 @@
         <div class="column is-6 is-offset-3">
           <h1 class="title">
             Receive {faucetInfo.payout}
-            {faucetInfo.symbol} per request
+            <span class="text-primary">{faucetInfo.symbol}</span> per request
           </h1>
           <h2 class="subtitle">
             Serving from {faucetInfo.account}
           </h2>
           <div id="hcaptcha" data-size="invisible"></div>
-          <div class="box">
+          <div class="">
             <div class="field is-grouped">
               <p class="control is-expanded">
                 <input
                   bind:value={input}
-                  class="input is-rounded"
+                  class="address-input"
                   type="text"
                   placeholder="Enter your address or ENS name"
                 />
               </p>
               <p class="control">
-                <button
-                  on:click={handleRequest}
-                  class="button is-primary is-rounded"
-                >
+                <button on:click={handleRequest} class="request-btn">
                   Request
                 </button>
               </p>
@@ -188,9 +192,7 @@
 
 <style>
   .hero.is-info {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url('/background.jpg') no-repeat center center fixed;
+    background-color: #180f2d;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -202,5 +204,34 @@
   }
   .box {
     border-radius: 19px;
+  }
+  .text-primary {
+    color: #d10045;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* border: 2px solid orange; */
+    padding: 0.25rem 0;
+  }
+  .vldm-logo {
+    width: 10rem;
+  }
+  .address-input {
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    border-radius: 30px;
+    border: none;
+  }
+  .request-btn {
+    padding: 0.75rem 1.25rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    background-color: #d10045;
+    color: white;
+    cursor: pointer;
   }
 </style>
