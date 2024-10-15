@@ -95,10 +95,10 @@
       });
 
       let { msg } = await res.json();
-      let type = res.ok ? 'is-success' : 'is-warning';
-      toast({ message: msg, type });
+      toast({ message: msg, type: res.ok ? 'is-success' : 'is-warning' });
     } catch (err) {
-      console.error(err);
+      console.error('Error requesting token: ', err);
+      toast({ message: err.message, type: 'is-danger' });
     }
   }
 
@@ -120,21 +120,18 @@
 
 <main>
   <section class="hero is-info is-fullheight">
+    <!-- Radial gradient -->
+    <div class="blueRadialGradient00"></div>
+    <div class="redRadialGradient00"></div>
+    <!--  -->
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
           <div class="navbar-brand">
-            <!-- <a class="navbar-item" href="../..">
-              <span class="icon">
-                <i class="fa fa-bath" />
-              </span>
-              <span><b>{faucetInfo.symbol} Faucet</b></span>
-            </a> -->
             <a href="https://www.validium.network/" class="brand">
               <div class="vldm-logo">
-                <img src="./validium-logo.png" alt="VLDM logo" />
+                <img src="./VLDM-Faucet-logo.png" alt="VLDM logo" />
               </div>
-              <span><b>Faucet</b></span>
             </a>
           </div>
           <!-- <div id="navbarMenu" class="navbar-menu">
@@ -156,18 +153,29 @@
       </nav>
     </div>
 
-    <div class="hero-body">
+    <div class=" main-section">
       <div class="container has-text-centered">
-        <div class="column is-6 is-offset-3">
-          <h1 class="title">
-            Receive {faucetInfo.payout}
-            <span class="text-primary">{faucetInfo.symbol}</span> per request
-          </h1>
-          <h2 class="subtitle">
-            Serving from {faucetInfo.account}
-          </h2>
+        <div class="column is-8 is-offset-2 content-wrapper">
+          <div class="heading-wrapper">
+            <h1 class="h1">
+              Receive
+              <span class="text-primary">
+                {faucetInfo.payout}
+                {faucetInfo.symbol}
+              </span>
+              per request
+            </h1>
+            <p class="p">
+              Use this faucet to get VLDM test funds. Ensure your wallet is
+              connected to the Validium network.
+            </p>
+          </div>
           <div id="hcaptcha" data-size="invisible"></div>
-          <div class="">
+          <h2 class="h2">
+            Serving from <br />
+            {faucetInfo.account}
+          </h2>
+          <div class="box">
             <div class="field is-grouped">
               <p class="control is-expanded">
                 <input
@@ -193,17 +201,18 @@
 <style>
   .hero.is-info {
     background-color: #180f2d;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    position: relative;
+    overflow: hidden;
   }
-  .hero .subtitle {
-    padding: 3rem 0;
-    line-height: 1.5;
+  .main-section {
+    /* border: 1px solid red; */
+    flex-grow: 1;
+    z-index: 20;
   }
   .box {
-    border-radius: 19px;
+    border: 2px solid rgba(48, 39, 100, 0.58);
+    background-color: #181235;
+    padding: 2rem 1.5rem;
   }
   .text-primary {
     color: #d10045;
@@ -213,7 +222,7 @@
     align-items: center;
     gap: 0.5rem;
     /* border: 2px solid orange; */
-    padding: 0.25rem 0;
+    padding: 1.5rem;
   }
   .vldm-logo {
     width: 10rem;
@@ -221,17 +230,76 @@
   .address-input {
     padding: 0.75rem 1.25rem;
     width: 100%;
-    border-radius: 30px;
+    flex: 1 1 200px;
+    border-radius: 10px;
     border: none;
+    background-color: #201a3e;
+    font-size: 1rem;
+    color: white;
+
+    &::placeholder {
+      color: #b9b9df;
+    }
   }
   .request-btn {
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 2rem;
     border-radius: 30px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     border: none;
     background-color: #d10045;
     color: white;
     cursor: pointer;
+  }
+  .blueRadialGradient00 {
+    position: absolute;
+    top: -65rem;
+    left: -45.5rem;
+    filter: blur(64px);
+    width: 85rem;
+    height: 85rem;
+    background: radial-gradient(ellipse, #7a42d6df 0%, transparent 80%);
+    z-index: 10;
+  }
+  .redRadialGradient00 {
+    position: absolute;
+    top: 30rem;
+    right: -8rem;
+    filter: blur(64px);
+    width: 22.5rem;
+    height: 22.5rem;
+    background: radial-gradient(ellipse, #d1004521 0%, transparent 100%);
+    z-index: 10;
+  }
+  .content-wrapper {
+    /* border: 2px solid pink; */
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .heading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 3rem;
+  }
+  .h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    word-break: break-all;
+  }
+  .p {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.125rem;
+    max-width: 26rem;
   }
 </style>
