@@ -167,7 +167,14 @@
             </h1>
             <p class="p">
               Use this faucet to get VLDM test funds. Ensure your wallet is
-              connected to the Validium network.
+              connected to the
+              <a
+                class="link"
+                href="https://validium.gitbook.io/docs/connect-to-validium"
+                target="_blank"
+              >
+                Validium network.
+              </a>
             </p>
           </div>
           <div id="hcaptcha" data-size="invisible"></div>
@@ -301,5 +308,10 @@
     font-weight: 500;
     line-height: 1.125rem;
     max-width: 26rem;
+  }
+  a.link {
+    color: #d10045 !important;
+    /* text-decoration: underline; */
+    border-bottom: 1px solid #d10045;
   }
 </style>
