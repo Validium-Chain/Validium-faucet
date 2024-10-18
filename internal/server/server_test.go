@@ -35,8 +35,8 @@ func setupTestServer(mockBuilder chain.TxBuilder) *Server {
 		httpPort:   8080,
 		proxyCount: 0,
 		interval:   0,
-		network:    "testnet",
-		symbol:     "ETH",
+		network:    "devnet",
+		symbol:     "VLDM",
 		payout:     1.0,
 	}
 	return NewServer(mockBuilder, cfg)
